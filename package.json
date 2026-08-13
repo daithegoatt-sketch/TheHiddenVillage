@@ -1,0 +1,14 @@
+{
+  "name": "hidden-village",
+  "version": "0.1.0",
+  "private": true,
+  "description": "HiddenVillage — an interactive fantasy storefront built as a lightweight web world.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check public/app.js && node --check public/catalog.js && node --check server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
