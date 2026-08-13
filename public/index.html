@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#d9c4a7" />
+  <meta name="description" content="HiddenVillage — an interactive fantasy store for gaming accounts, services and digital products." />
+  <title>HiddenVillage</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <section id="intro" class="intro-screen" aria-label="HiddenVillage entrance">
+      <div class="intro-dust dust-a"></div>
+      <div class="intro-dust dust-b"></div>
+      <button id="enterWorld" class="wood-sign intro-sign" aria-label="Enter HiddenVillage">
+        <span class="sign-rope left"></span>
+        <span class="sign-rope right"></span>
+        <span class="sign-knot left"></span>
+        <span class="sign-knot right"></span>
+        <span class="brand-small">THE</span>
+        <strong>HiddenVillage</strong>
+        <span class="brand-sub">A secret market beyond the road</span>
+        <i class="grass g1"></i><i class="grass g2"></i><i class="grass g3"></i>
+      </button>
+      <p class="intro-hint">Tap the sign to enter</p>
+    </section>
+
+    <main id="game" class="game is-hidden" aria-live="polite">
+      <header class="hud top-hud">
+        <button id="homeButton" class="hud-chip brand-chip" type="button" aria-label="Return to village">
+          <span class="crest">HV</span><span>HiddenVillage</span>
+        </button>
+        <div class="hud-actions">
+          <button id="quickShop" class="hud-chip" type="button">Quick shop</button>
+          <button id="soundButton" class="icon-button" type="button" aria-label="Toggle ambience">♪</button>
+        </div>
+      </header>
+
+      <section id="worldScene" class="scene world-scene">
+        <div class="sky">
+          <div class="sun-glow"></div>
+          <div class="cloud cloud-1"></div><div class="cloud cloud-2"></div><div class="cloud cloud-3"></div>
+        </div>
+        <div class="far-castle" aria-hidden="true">
+          <span class="castle-tower tower-l"></span><span class="castle-core"></span><span class="castle-tower tower-r"></span>
+        </div>
+        <div class="mountains mountains-left"></div><div class="mountains mountains-right"></div>
+        <div class="mist mist-a"></div><div class="mist mist-b"></div>
+        <div class="terrain"></div>
+        <div class="river"><span class="river-glint r1"></span><span class="river-glint r2"></span><span class="river-glint r3"></span></div>
+        <div class="main-road"></div>
+        <div class="road-branch branch-left"></div><div class="road-branch branch-right"></div>
+
+        <div class="notice-board village-notice">
+          <div class="notice-pin"></div>
+          <strong>Village Notice</strong>
+          <span>New stock arrives at dusk.</span>
+        </div>
+
+        <article class="building building-left-near" data-store="accounts" tabindex="0" aria-label="Account Emporium">
+          <div class="chimney"><span></span></div><div class="roof roof-warm"></div><div class="timber-frame"></div>
+          <div class="building-window w-left"></div><div class="building-window w-right"></div>
+          <div class="door"><span></span></div>
+          <div class="shop-sign">Account Emporium</div>
+          <div class="planter"></div>
+        </article>
+
+        <article class="building building-left-far" data-store="services" tabindex="0" aria-label="Adventurer Guild">
+          <div class="chimney"><span></span></div><div class="roof roof-moss"></div><div class="timber-frame"></div>
+          <div class="building-window w-left"></div><div class="building-window w-right"></div>
+          <div class="door"><span></span></div>
+          <div class="shop-sign">Adventurer Guild</div>
+        </article>
+
+        <article class="building building-right-near" data-store="subscriptions" tabindex="0" aria-label="Arcane Subscriptions">
+          <div class="roof roof-violet"></div><div class="timber-frame"></div>
+          <div class="building-window w-left"></div><div class="building-window w-right"></div>
+          <div class="door"><span></span></div>
+          <div class="shop-sign">Arcane Subscriptions</div>
+          <div class="lantern"></div>
+        </article>
+
+        <article class="building building-right-far" data-store="support" tabindex="0" aria-label="Village Support">
+          <div class="chimney"><span></span></div><div class="roof roof-blue"></div><div class="timber-frame"></div>
+          <div class="building-window w-left"></div><div class="building-window w-right"></div>
+          <div class="door"><span></span></div>
+          <div class="shop-sign">Village Support</div>
+        </article>
+
+        <article class="town-hall" data-store="townhall" tabindex="0" aria-label="Town Hall">
+          <div class="hall-roof"></div><div class="hall-tower"><span class="clock-face">✦</span></div>
+          <div class="hall-body"><div class="hall-window"></div><div class="hall-door"></div></div>
+          <div class="shop-sign hall-sign">Town Hall</div>
+        </article>
+
+        <div id="worldCharacter" class="character world-character" aria-label="Your village character">
+          <img src="/assets/character.svg" alt="" draggable="false" />
+          <span class="character-shadow"></span>
+        </div>
+
+        <button id="contextAction" class="context-action is-hidden" type="button"></button>
+        <div class="movement-tip">Tap the road or a building to move</div>
+      </section>
+
+      <section id="interiorScene" class="scene interior-scene is-hidden" aria-label="Shop interior">
+        <div class="interior-wall"><span class="beam b1"></span><span class="beam b2"></span><span class="beam b3"></span></div>
+        <div class="window-light"></div>
+        <div class="shelf shelf-left"><span></span><span></span><span></span></div>
+        <div class="shelf shelf-right"><span></span><span></span><span></span></div>
+        <div class="counter">
+          <div class="counter-top"></div><div class="counter-panel p1"></div><div class="counter-panel p2"></div>
+        </div>
+        <div class="cashier" id="cashier">
+          <div class="cashier-hair"></div><div class="cashier-head"></div><div class="cashier-body"></div>
+          <div class="cashier-label"><strong id="cashierName">Mira</strong><span id="cashierRole">Account Keeper</span></div>
+        </div>
+        <div class="interior-door" id="interiorDoor"><span class="door-handle"></span><small>EXIT</small></div>
+        <div class="rug"></div>
+        <div id="interiorCharacter" class="character interior-character">
+          <img src="/assets/character.svg" alt="" draggable="false" />
+          <span class="character-shadow"></span>
+        </div>
+        <button id="interiorAction" class="context-action is-hidden" type="button"></button>
+      </section>
+
+      <div id="bookOverlay" class="book-overlay is-hidden" role="dialog" aria-modal="true" aria-label="Merchant catalogue">
+        <div class="book-stage">
+          <div id="book" class="ancient-book">
+            <div class="book-spine"></div>
+            <section class="book-page left-page">
+              <div class="page-corner tl"></div><div class="page-corner bl"></div>
+              <div class="book-toolbar">
+                <button id="bookBack" class="book-icon is-hidden" type="button" aria-label="Back">←</button>
+                <div class="book-search">
+                  <span>⌕</span>
+                  <input id="catalogSearch" type="search" autocomplete="off" placeholder="Search the catalogue…" aria-label="Search catalogue" />
+                </div>
+              </div>
+              <div class="page-heading">
+                <span class="eyebrow">Merchant catalogue</span>
+                <h2 id="bookTitle">Account Emporium</h2>
+                <p id="bookSubtitle">Choose a collection.</p>
+              </div>
+              <div id="cardGrid" class="binder-grid"></div>
+              <div id="emptyState" class="empty-state is-hidden">
+                <span>⌕</span><strong>Nothing found</strong><p>Try another game, character, service or keyword.</p>
+              </div>
+              <div class="page-number">I</div>
+            </section>
+            <section class="book-page right-page">
+              <div class="page-corner tr"></div><div class="page-corner br"></div>
+              <button id="bookClose" class="book-close" type="button" aria-label="Close book">×</button>
+              <div id="rightDefault" class="right-default">
+                <div class="ink-emblem">HV</div>
+                <h3>HiddenVillage Ledger</h3>
+                <p>Select a card from the left page to inspect it. Search understands game names as well as product tags such as character names.</p>
+                <div class="merchant-note"><span>✦</span> Items shown in this first build are sample catalogue data and can be replaced in <code>catalog.js</code>.</div>
+              </div>
+              <article id="productDetail" class="product-detail is-hidden">
+                <button id="detailClose" class="detail-close" type="button" aria-label="Close product details">×</button>
+                <span id="detailBadge" class="detail-badge"></span>
+                <div id="detailMark" class="detail-mark">GI</div>
+                <h3 id="detailTitle"></h3>
+                <p id="detailDescription" class="detail-description"></p>
+                <div class="detail-rule"></div>
+                <div class="detail-meta"><span>Price</span><strong id="detailPrice"></strong></div>
+                <div class="detail-meta"><span>Status</span><strong id="detailStock"></strong></div>
+                <div id="detailTags" class="tag-list"></div>
+                <button id="buyButton" class="purchase-button" type="button">Purchase</button>
+                <p class="secure-note">Payment integration comes after the storefront flow is approved.</p>
+              </article>
+              <div class="page-number">II</div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <div id="checkoutSheet" class="checkout-sheet is-hidden" role="dialog" aria-modal="true" aria-label="Checkout preview">
+        <div class="checkout-card">
+          <button id="checkoutClose" class="sheet-close" type="button">×</button>
+          <span class="eyebrow">Checkout preview</span>
+          <h2 id="checkoutTitle">Selected item</h2>
+          <p>This phase completes the village, shop navigation, catalogue and product selection flow. Connect your payment provider in the next phase before taking real payments.</p>
+          <div class="checkout-summary"><span>Selected</span><strong id="checkoutPrice"></strong></div>
+          <button id="checkoutOkay" class="purchase-button" type="button">Return to catalogue</button>
+        </div>
+      </div>
+
+      <div id="quickShopPanel" class="quick-shop-panel is-hidden" role="dialog" aria-modal="true" aria-label="Quick shop">
+        <div class="quick-shop-card">
+          <div class="quick-head"><div><span class="eyebrow">Skip the walk</span><h2>Quick Shop</h2></div><button id="quickClose" class="sheet-close" type="button">×</button></div>
+          <div id="quickStoreGrid" class="quick-grid"></div>
+        </div>
+      </div>
+
+      <div id="toast" class="toast is-hidden"></div>
+    </main>
+  </div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
